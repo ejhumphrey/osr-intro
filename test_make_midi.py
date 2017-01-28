@@ -15,4 +15,4 @@ def test_rando_midi_not_empty(tmpdir):
     fout = os.path.join(str(tmpdir), "test_rando_midi_out-2.mid")
     assert not os.path.exists(fout)
     make_midi.rando_midi(fout)
-    assert open(fout).read()
+    assert open(fout, 'rb').read()
