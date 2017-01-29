@@ -12,8 +12,11 @@ def sample_midis():
 
 
 def test_compute_pitch_histogram(sample_midis):
-    pitch_counts = midi_tools.compute_pitch_histogram(sample_midis[0])
-    assert sum(pitch_counts.values()) > 0
+    data = midi_tools.compute_pitch_histogram(sample_midis[0])
+    # Test that 'name' is a key in `data`
+    assert 'name' in data
+    # Test that the pitch histogram values sum to more than 0
+    assert sum(data['pitches'].values()) > 0
 
 
 def test_process_many(sample_midis):
