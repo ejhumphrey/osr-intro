@@ -1,4 +1,4 @@
-
+from joblib import Parallel, delayed
 import pretty_midi
 
 
@@ -25,3 +25,9 @@ def compute_pitch_histogram(filename):
             pc = note.pitch % 12
             pitch_counts[pc] += (note.end - note.start)
     return pitch_counts
+
+
+def process_many(filenames, n_jobs, verbose):
+    pool = Parallel(verbose=verbose, n_jobs=n_jobs)
+    fx = delayed(compute_pitch_histogram)
+    return pool(fx(fn) for fn in filenames)
